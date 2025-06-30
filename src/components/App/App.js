@@ -3,57 +3,20 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist'
+import Spotify from '../../util/Spotify';
 
 function App() {
 
-  const [searchResults] = useState([
-    {
-      id: 1,
-      name: 'Watch the World Burn',
-      artist: 'Falling in Reverse',
-      album: 'Popular Monster',
-      uri: 'spotify:track:6rqhFgasdf9MLmUQDhG696'
-    },
-    {
-      id: 2,
-      name: 'Somebody',
-      artist: 'FISHER',
-      album: 'Somebody',
-      uri: 'spotify:track:6rqhFgdsffnb7MLmUQDhG9'
-    },
-    {
-      id: 3,
-      name: 'I Fall Apart',
-      artist: 'Post Malone',
-      album: 'Stoney',
-      uri: 'spotify:track:4rrrgdbbKwnb9MLmUQDhG6'
-    }
-  ])
+  const [searchResults, setSearchResults] = useState([])
 
-  const [playlistName, setPlaylistName] = useState('Rock');
+  const [playlistName, setPlaylistName] = useState('New Playlist');
 
-  const [playlistTracks, setPlaylistTracks] = useState([
-    {
-      id: 4,
-      name: 'Last Resort',
-      artist: 'Papa Roach',
-      album: 'Ready to Rumble',
-      uri: 'spotify:track:4rrrgfropwnb9MLmUQDhG6'
-    },
-    {
-      id: 5,
-      name: 'Popular Monster',
-      artist: 'Falling in Reverse',
-      album: 'Popular Monster',
-      uri: 'spotify:track:4rrrgdbbKwnb9ydlpQDhG6'
-    }
-  ])
+  const [playlistTracks, setPlaylistTracks] = useState([])
 
   const addTrack = (track) =>{
     if(playlistTracks.find(savedTrack => savedTrack.id === track.id)){
       return;
     }
-
     setPlaylistTracks(prevTracks => [...prevTracks, track]);
   }
 
@@ -65,7 +28,6 @@ function App() {
 
   const updatePlaylistName = (name) =>{
     setPlaylistName(name);
-    console.log(name);
   }
 
   const savePlaylist = () => {
@@ -77,10 +39,18 @@ function App() {
     setPlaylistName('New Playlist');
   }
 
+  const search = (term) => {
+    Spotify.search(term).then((results) => {
+      setSearchResults(results);
+    });
+  }
+
   return (
     <div className="App">
-      <h1>Something</h1>
-      <SearchBar />
+      <h1>JamMerge</h1>
+      <SearchBar 
+        onSearch={search}
+      />
       <div className='App-playlist'>
         <SearchResults 
           tracks={searchResults} 
