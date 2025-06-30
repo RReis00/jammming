@@ -1,4 +1,4 @@
-import React, {use, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
@@ -6,7 +6,7 @@ import Playlist from '../Playlist/Playlist'
 
 function App() {
 
-  const [searchResults, setSearchResults] = useState([
+  const [searchResults] = useState([
     {
       id: 1,
       name: 'Watch the World Burn',
