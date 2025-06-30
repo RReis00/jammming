@@ -1,8 +1,8 @@
 import React from "react";
 
-function Track({track, isRemoval}){
+function Track({track, isRemoval, onAdd}){
     const addTrack = () => {
-
+        onAdd(track);
     };
 
     const removeTrack = () =>{

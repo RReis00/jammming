@@ -44,12 +44,20 @@ function App() {
     }
   ])
 
+  const addTrack = (track) =>{
+    if(playlistTracks.find(savedTrack => savedTrack.id === track.id)){
+      return;
+    }
+
+    setPlaylistTracks(prevTracks => [...prevTracks, track]);
+  }
+
   return (
     <div className="App">
       <h1>Something</h1>
       <SearchBar />
       <div className='App-playlist'>
-        <SearchResults tracks={searchResults}/>
+        <SearchResults tracks={searchResults} onAdd={addTrack}/>
         <Playlist 
           playlistName={playlistName}
           playlistTracks={playlistTracks}
