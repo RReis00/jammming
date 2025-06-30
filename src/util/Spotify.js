@@ -33,6 +33,9 @@ const Spotify = {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       const json = await response.json();
+
+      if(!json.tracks) return [];
+
       return json.tracks.items.map((track) => ({
         id: track.id,
         name: track.name,
