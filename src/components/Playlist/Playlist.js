@@ -1,10 +1,14 @@
 import React from "react";
 import TrackList from "../TrackList/TrackList";
 
-function Playlist({playlistName, playlistTracks, onRemove}){
+function Playlist({playlistName, playlistTracks, onRemove, onNameChange}){
+    const handleNameChange = ({target}) => {
+        onNameChange(target.value);
+    }
+
     return (
         <div className="Playlist">
-            <input defaultValue={playlistName}/>
+            <input defaultValue={playlistName} onChange={handleNameChange}/>
             <TrackList 
                 tracks={playlistTracks} 
                 isRemoval={true} 
