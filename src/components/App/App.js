@@ -11,19 +11,22 @@ function App() {
       id: 1,
       name: 'Watch the World Burn',
       artist: 'Falling in Reverse',
-      album: 'Popular Monster'
+      album: 'Popular Monster',
+      uri: 'spotify:track:6rqhFgasdf9MLmUQDhG696'
     },
     {
       id: 2,
       name: 'Somebody',
       artist: 'FISHER',
-      album: 'Somebody'
+      album: 'Somebody',
+      uri: 'spotify:track:6rqhFgdsffnb7MLmUQDhG9'
     },
     {
       id: 3,
       name: 'I Fall Apart',
       artist: 'Post Malone',
-      album: 'Stoney'
+      album: 'Stoney',
+      uri: 'spotify:track:4rrrgdbbKwnb9MLmUQDhG6'
     }
   ])
 
@@ -34,13 +37,15 @@ function App() {
       id: 4,
       name: 'Last Resort',
       artist: 'Papa Roach',
-      album: 'Ready to Rumble'
+      album: 'Ready to Rumble',
+      uri: 'spotify:track:4rrrgfropwnb9MLmUQDhG6'
     },
     {
       id: 5,
       name: 'Popular Monster',
       artist: 'Falling in Reverse',
-      album: 'Popular Monster'
+      album: 'Popular Monster',
+      uri: 'spotify:track:4rrrgdbbKwnb9ydlpQDhG6'
     }
   ])
 
@@ -63,6 +68,15 @@ function App() {
     console.log(name);
   }
 
+  const savePlaylist = () => {
+    const savedTracks = playlistTracks.map(track => track.uri);
+    console.log(playlistName);
+    console.log(savedTracks);
+
+    setPlaylistTracks([]);
+    setPlaylistName('New Playlist');
+  }
+
   return (
     <div className="App">
       <h1>Something</h1>
@@ -77,6 +91,7 @@ function App() {
           playlistTracks={playlistTracks}
           onRemove={removeTrack}
           onNameChange={updatePlaylistName}
+          onSave={savePlaylist}
         />
       </div>
     </div>
