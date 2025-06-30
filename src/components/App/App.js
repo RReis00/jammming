@@ -40,9 +40,8 @@ function App() {
   }
 
   const search = (term) => {
-    Spotify.search(term).then((results) => {
-      setSearchResults(results);
-    });
+    if (!term.trim()) return;
+    Spotify.search(term).then(setSearchResults);
   }
 
   return (
