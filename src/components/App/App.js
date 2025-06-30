@@ -30,13 +30,17 @@ function App() {
     setPlaylistName(name);
   }
 
-  const savePlaylist = () => {
+  const savePlaylist = async () => {
     const savedTracks = playlistTracks.map(track => track.uri);
-    console.log(playlistName);
-    console.log(savedTracks);
+    const success = await Spotify.savePlaylist(playlistName, savedTracks);
 
-    setPlaylistTracks([]);
-    setPlaylistName('New Playlist');
+    if(success){
+      setPlaylistTracks([]);
+      setPlaylistName('New Playlist');
+      alert('Playlist successfully saved to Spotify!');
+    } else {
+      alert('Error saving playlist on Spotify!');
+    }
   }
 
   const search = (term) => {

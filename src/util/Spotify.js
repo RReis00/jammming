@@ -94,6 +94,46 @@ const Spotify = {
             console.error('Spotify Search Error:', error);
             return [];
         }
+    },
+
+    async savePlaylist(name, trackUris) {
+        if(!name || !trackUris.length) return;
+
+        const token = await this.getAccessToken();
+        if(!token) return;
+        try {
+            const userResponse = await fetch("https://api.spotify.com/v1/me", {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const userData = await userResponse.json();
+            const userId = userData.id;
+
+            const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name })
+            });
+
+            const playlistData = await playlistResponse.json();
+            const playlistId = playlistData.id;
+
+            await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ uris: trackUris })
+            });
+
+            return true;
+        } catch (error) {
+            console.error("Saving Playlist Error: ", error);
+            return false;
+        }
     }
 };
 
