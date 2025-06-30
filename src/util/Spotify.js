@@ -76,7 +76,7 @@ const Spotify = {
         const token = await this.getAccessToken();
         if(!token) return [];
 
-        const endpoint = `https://api.spotify.com/v1/search?type=track&limit=20&q=${encodeURIComponent(term)}`;
+        const endpoint = `https://api.spotify.com/v1/search?type=track&limit=10&q=${encodeURIComponent(term)}`;
 
         try {
             const response = await fetch(endpoint, {
