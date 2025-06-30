@@ -1,12 +1,12 @@
 import React from "react";
 
-function Track({track, isRemoval, onAdd}){
+function Track({track, isRemoval, onAdd, onRemove}){
     const addTrack = () => {
         onAdd(track);
     };
 
     const removeTrack = () =>{
-
+        onRemove(track);
     };
 
     const renderAction = () =>{
