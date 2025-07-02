@@ -14,7 +14,13 @@ function Playlist({playlistName, playlistTracks, onRemove, onNameChange, onSave}
                 isRemoval={true} 
                 onRemove={onRemove}
             />
-            <button className="Playlist-save" onClick={onSave}>SAVE TO SPOTIFY</button>
+            <button 
+                className="Playlist-save" 
+                onClick={onSave}
+                disabled={!playlistTracks.length}
+                >
+                    SAVE TO SPOTIFY
+            </button>
         </div>
     )
 }
