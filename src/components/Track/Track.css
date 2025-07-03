@@ -36,3 +36,9 @@
 .Track button:hover {
     background-color: #1ed760;
 }
+
+.Track-AudioPreview {
+    width: 100%;
+    margin-top: 8px;
+    outline: none;
+}

@@ -89,6 +89,7 @@ const Spotify = {
                 artist: track.artists?.[0]?.name || "Unknown",
                 album: track.album.name,
                 uri: track.uri,
+                preview: track.preview_url
             })) || [];
         } catch(error) {
             console.error('Spotify Search Error:', error);
