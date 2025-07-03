@@ -1,5 +1,6 @@
 import React from "react";
 import TrackList from "../TrackList/TrackList";
+import './Playlist.css'
 
 function Playlist({playlistName, playlistTracks, onRemove, onNameChange, onSave}){
     const handleNameChange = ({target}) => {

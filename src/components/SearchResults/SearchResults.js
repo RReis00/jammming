@@ -1,5 +1,6 @@
 import React from "react";
 import TrackList from '../TrackList/TrackList'
+import './SearchResults.css'
 
 function SearchResults({tracks, onAdd}){
     return (

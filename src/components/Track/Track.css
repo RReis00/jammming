@@ -1,0 +1,38 @@
+.Track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c2c2c;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.Track-Information {
+    text-align: left;
+}
+
+.Track-Information h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.Track-Information p {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.Track button{
+    background-color: #1db954;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.Track button:hover {
+    background-color: #1ed760;
+}

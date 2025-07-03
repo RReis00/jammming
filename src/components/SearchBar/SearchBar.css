@@ -1,0 +1,27 @@
+.SearchBar{
+    margin-bottom: 2rem;
+}
+
+.SearchBar input {
+    width: 80%;
+    max-width: 400px;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.SearchBar button {
+    background-color: #1db954;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.SearchBar button:hover {
+    background-color: #1ed760;
+}
