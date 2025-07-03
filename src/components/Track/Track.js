@@ -23,12 +23,14 @@ function Track({track, isRemoval, onAdd, onRemove}){
             <div className="Track-Information">
                 <h3>{track?.name || 'Track Name'}</h3>
                 <p>{track?.artist || 'Artist'} | {track?.album || 'Album'}</p>
-                {track.preview && (
+                {track.preview ? (
                     <audio controls className="Track-AudioPreview">
-                        <source src={track.preview} type="audio/mpeg"/>
-                        Your Browser does not support the audio element!
+                        <source src={track.preview} type="audio/mpeg" />
+                        Your browser does not support the audio element.
                     </audio>
-                )}
+                    ) : (
+                        <p className="NoPreview">🎧 Preview indisponível</p>
+                    )}
             </div>
             {renderAction()}
         </div>
