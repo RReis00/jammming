@@ -69,15 +69,6 @@ const Spotify = {
 
             window.history.replaceState({}, document.title, window.location.pathname);
 
-            const savedTerm = localStorage.getItem("search_term");
-            if(savedTerm) {
-                localStorage.removeItem("search_term");
-                setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent("restoreSearch", {detail: savedTerm}));
-                }, 0);
-            }
-
-
             return accessToken;
         } catch(error){
             console.error("Error obtaining access token: ", error);
@@ -88,7 +79,6 @@ const Spotify = {
         const token = await this.getAccessToken();
         if(!token) return [];
 
-        localStorage.setItem("search_term", term);
 
         const endpoint = `https://api.spotify.com/v1/search?type=track&limit=30&q=${encodeURIComponent(term)}`;
 

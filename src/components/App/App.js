@@ -74,23 +74,6 @@ function App() {
   }, [playlistTracks, rawResults])
 
 
-  useEffect(() => {
-    const handleRestoreSearch = (e) => {
-      const restoredTerm = e.detail;
-      if(restoredTerm) {
-        Spotify.search(restoredTerm).then(setRawResults);
-      }
-    };
-
-    window.addEventListener("restoreSearch", handleRestoreSearch);
-    return () => {
-      window.removeEventListener("restoreSearch", handleRestoreSearch);
-    };
-  }, []);
-
-
-
-
   if(isSaving){
     return (
       <div className='LoadingScreen'>
