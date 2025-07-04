@@ -1,4 +1,3 @@
--Include preview samples for each track
 
 -Only display songs not currently present in the playlist in the search results
 
