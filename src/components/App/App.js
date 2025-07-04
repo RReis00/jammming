@@ -15,6 +15,8 @@ function App() {
 
   const [rawResults, setRawResults] = useState([]);
 
+  const [isSaving, setIsSaving] = useState(false);
+
   const addTrack = (track) =>{
     if(playlistTracks.find(savedTrack => savedTrack.id === track.id)){
       return;
@@ -33,6 +35,7 @@ function App() {
   }
 
   const savePlaylist = async () => {
+    setIsSaving(true);
     const savedTracks = playlistTracks.map(track => track.uri);
     const success = await Spotify.savePlaylist(playlistName, savedTracks);
 
@@ -43,6 +46,7 @@ function App() {
     } else {
       alert('Error saving playlist on Spotify!');
     }
+    setIsSaving(false)
   }
 
   const search = async (term) => {
@@ -61,6 +65,15 @@ function App() {
 
       setSearchResults(finalResults);
   }, [playlistTracks, rawResults])
+
+  if(isSaving){
+    return (
+      <div className='LoadingScreen'>
+        <h2>Saving your playlist</h2>
+        <div className='spinner'></div>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
