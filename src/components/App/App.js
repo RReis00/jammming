@@ -45,7 +45,14 @@ function App() {
 
   const search = (term) => {
     if (!term.trim()) return;
-    Spotify.search(term).then(setSearchResults);
+
+    Spotify.search(term).then(results => {
+      const filtered = results.filter(track =>
+        !playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
+      );
+
+      setSearchResults(filtered.slice(0, 10));
+    });
   }
 
   return (
@@ -58,7 +65,6 @@ function App() {
         <SearchResults 
           tracks={searchResults} 
           onAdd={addTrack}
-          playlistTracks={playlistTracks}
         />
         <Playlist 
           playlistName={playlistName}

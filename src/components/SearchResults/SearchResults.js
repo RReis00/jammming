@@ -2,16 +2,14 @@ import React from "react";
 import TrackList from '../TrackList/TrackList'
 import './SearchResults.css'
 
-function SearchResults({tracks, onAdd, playlistTracks}){
-    const filteredTracks = tracks.filter(
-        track => !playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
-    );
+function SearchResults({tracks, onAdd}){
+    
 
     return (
         <div className="SearchResults">
             <h2>Results</h2>
             <TrackList 
-                tracks={filteredTracks} 
+                tracks={tracks} 
                 isRemoval={false} 
                 onAdd={onAdd}
             /> 
