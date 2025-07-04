@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
@@ -12,6 +12,8 @@ function App() {
   const [playlistName, setPlaylistName] = useState('New Playlist');
 
   const [playlistTracks, setPlaylistTracks] = useState([])
+
+  const [rawResults, setRawResults] = useState([]);
 
   const addTrack = (track) =>{
     if(playlistTracks.find(savedTrack => savedTrack.id === track.id)){
@@ -43,17 +45,29 @@ function App() {
     }
   }
 
-  const search = (term) => {
+  const search = async (term) => {
     if (!term.trim()) return;
 
-    Spotify.search(term).then(results => {
-      const filtered = results.filter(track =>
-        !playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
-      );
-
-      setSearchResults(filtered.slice(0, 10));
-    });
+    const results = await Spotify.search(term);
+    setRawResults(results);
   }
+
+  useEffect(() => {
+    const filtered = rawResults.filter(
+      track => !playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
+    );
+
+    const finalResults = filtered.length >= 10
+      ? filtered.slice(0, 10)
+      : [
+        ...filtered,
+        ...rawResults.filter(track =>
+          playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
+        ).slice(0, 10 - filtered.length)
+      ];
+
+      setSearchResults(finalResults);
+  }, [playlistTracks, rawResults])
 
   return (
     <div className="App">
