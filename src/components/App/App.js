@@ -57,14 +57,7 @@ function App() {
       track => !playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
     );
 
-    const finalResults = filtered.length >= 10
-      ? filtered.slice(0, 10)
-      : [
-        ...filtered,
-        ...rawResults.filter(track =>
-          playlistTracks.some(playlistTrack => playlistTrack.id === track.id)
-        ).slice(0, 10 - filtered.length)
-      ];
+    const finalResults = filtered.slice(0, 10);
 
       setSearchResults(finalResults);
   }, [playlistTracks, rawResults])
