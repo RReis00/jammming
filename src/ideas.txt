@@ -1,5 +1,3 @@
--Add a loading screen while playlist is saving
-
 -After user redirect on login, restoring the search term from before the redirect
 
 -Ensure playlist information doesn’t get cleared if a user has to refresh their access token
