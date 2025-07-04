@@ -17,6 +17,8 @@ function App() {
 
   const [isSaving, setIsSaving] = useState(false);
 
+  const [toast, setToast] = useState('');
+
   const addTrack = (track) =>{
     if(playlistTracks.find(savedTrack => savedTrack.id === track.id)){
       return;
@@ -34,6 +36,11 @@ function App() {
     setPlaylistName(name);
   }
 
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => setToast(''), 2000);
+  }
+
   const savePlaylist = async () => {
     setIsSaving(true);
     const savedTracks = playlistTracks.map(track => track.uri);
@@ -42,11 +49,11 @@ function App() {
     if(success){
       setPlaylistTracks([]);
       setPlaylistName('New Playlist');
-      alert('Playlist successfully saved to Spotify!');
+      showToast('✔ Playlist saved to Spotify!');
     } else {
-      alert('Error saving playlist on Spotify!');
+      showToast('✖ Error saving playlist!');
     }
-    setIsSaving(false)
+    setIsSaving(false);
   }
 
   const search = async (term) => {
@@ -76,25 +83,29 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>JamMerge</h1>
-      <SearchBar 
-        onSearch={search}
-      />
-      <div className='App-playlist'>
-        <SearchResults 
-          tracks={searchResults} 
-          onAdd={addTrack}
+    <>
+      {toast && <div className='toast'>{toast}</div>}
+      <div className="App">
+        <h1>JamMerge</h1>
+        <SearchBar 
+          onSearch={search}
         />
-        <Playlist 
-          playlistName={playlistName}
-          playlistTracks={playlistTracks}
-          onRemove={removeTrack}
-          onNameChange={updatePlaylistName}
-          onSave={savePlaylist}
-        />
+        <div className='App-playlist'>
+          <SearchResults 
+            tracks={searchResults} 
+            onAdd={addTrack}
+          />
+          <Playlist 
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+            onRemove={removeTrack}
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
+          />
+        </div>
       </div>
-    </div>
+    </>
+    
   );
 }
 
