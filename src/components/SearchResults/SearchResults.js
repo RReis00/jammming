@@ -1,20 +1,21 @@
 import React from "react";
-import TrackList from '../TrackList/TrackList'
-import './SearchResults.css'
+import TrackList from "../TrackList/TrackList";
+import "./SearchResults.css";
 
-function SearchResults({tracks, onAdd}){
-    
+// Displays the list of tracks returned from a search
+function SearchResults({ tracks, onAdd }) {
+  return (
+    <div className="SearchResults">
+      <h2>Results</h2>
 
-    return (
-        <div className="SearchResults">
-            <h2>Results</h2>
-            <TrackList 
-                tracks={tracks} 
-                isRemoval={false} 
-                onAdd={onAdd}
-            /> 
-        </div>
-    )
+      {/* Reuse TrackList component to display the search results */}
+      <TrackList
+        tracks={tracks} // array of track objects to show
+        isRemoval={false} // false = shows "+" button (add to playlist)
+        onAdd={onAdd} // callback to add a track to the playlist
+      />
+    </div>
+  );
 }
 
 export default SearchResults;
